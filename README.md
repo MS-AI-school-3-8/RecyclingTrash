@@ -12,7 +12,7 @@ YOLO <br/>
 
 <h2> 👨‍🌾 Team </h2>
 권재호<br/>
-이조은<br/>
+이조은<br/>jenia1607@naver.com
 전윤성<br/>
 강영서<br/>
 허예인<br/>
