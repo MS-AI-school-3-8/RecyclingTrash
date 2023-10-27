@@ -14,5 +14,5 @@ YOLO <br/>
 권재호<br/>
 이조은<br/>jenia1607@naver.com
 전윤성<br/>
-강영서<br/>
+강영서 22019112024@dgu.ac.kr<br/>
 허예인<br/>
