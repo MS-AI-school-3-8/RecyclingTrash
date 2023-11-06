@@ -1,0 +1,5 @@
+train: ../cell_towers_dataset/train/images
+val: ../cell_towers_dataset/test/images
+
+nc: 2
+names: ['joint', 'side']
