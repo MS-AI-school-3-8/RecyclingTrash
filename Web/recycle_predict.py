@@ -50,9 +50,11 @@ def predict():
     h, w, c = image.shape
     image = cv2.resize(image, (640,640))
 
+    threshold = []
+
     # predict에 따른 rectangle 그리기
     for box, cls_number, conf in zip(boxes, cls, conf):
-        # conf_number = float(conf.item())    # 왜 있는지는 모르겠음...
+        conf_number = str(float(conf.item()).__round__(2))    # 확률값
         cls_number_int = int(cls_number.item())
         cls_name = cls_dict[cls_number_int]
         x1, y1 ,x2 ,y2 = box
@@ -70,16 +72,23 @@ def predict():
         x2_scale = int(x2_int * scale_factor_x)
         y2_scale = int(y2_int * scale_factor_y)
 
+        image = cv2.putText(image, cls_name, (x1_scale+10, y2_scale-50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)     #이미지에 텍스트 넣기
+        image = cv2.putText(image, conf_number, (x1_scale+10, y2_scale-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)     #이미지에 텍스트 넣기
         image = cv2.rectangle(image, (x1_scale, y1_scale), (x2_scale, y2_scale), (0,0,255), 2)
 
     cv2.imwrite("./results/" + imagename, image) # 결과 사진 저장
-    cv2.imshow("Test", image)
+    #cv2.imshow("Test", image)
     cv2.waitKey(0)
     #--------------------------------------------------------------------------------------------
 
     # list, json
-    response = make_response()  # 탐지 결과 사진 전달
+    #text_data = "results"
+    #response = make_response(text_data)  # 탐지 결과 사진 전달
+    #response.headers['Content-Type'] = 'text/plain'
     
+    #이미지 파일 첨부 
+    #response.set_data("./results/" + imagename)
+
     return send_file("./results/" + imagename, mimetype='image/jpeg')
 
 
