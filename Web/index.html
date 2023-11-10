@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recycling Trash</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body> 
+<div class="main">
+    <div class="title">
+      <h3>Object Detection for Recycling</h3>
+    </div>
+
+    <!--
+    <div id="image-box">
+      <img id="image-display" />
+      <div id="pred-result" class="hidden"></div>
+      <svg id="loader" class="hidden" viewBox="0 0 64 64" width="64" height="64">
+        <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+      </svg>
+    </div>
+    -->
+
+    <div id="image-box" class="panel">
+
+      <label for="file-upload" id="file-drag" class="upload-box">
+
+        <form action="/predRecycling" method="POST" enctype="multipart/form-data" target="_blank">
+
+          <input id="file-upload" class="hidden" type="file" accept="image/*" onchange="setThumbnail(event);"/>
+          <div id = "get-image" class = "upload-thumnail">
+            <div id="image_container" class = "product">
+              
+            </div>
+            <img id="image-preview" class = "product" />
+          </div>
+          
+        </form>
+      </label>
+    </div>
+
+    <div style="margin-bottom: 2rem;">
+      <input type="submit" value="Submit" class="button" onclick="getImage();" />
+    </div>
+
+   
+    <div>
+      <a href="https://github.com/MS-AI-school-3-8/RecyclingTrash" target="_blank" style="font-size:20px;">Git Page</a>
+        <br>
+      <a href="/downRecycling" target="_blank" style="font-size:20px;">Download Report</a>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+</html>
