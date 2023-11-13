@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, Response, send_file
 import numpy as np
 from PIL import Image
+import base64
 import cv2
 from ultralytics import YOLO
 
@@ -17,7 +18,7 @@ def indexHome():
 def predRecycling():
     model = YOLO("./recycling8m_best.pt")    # ...여기 있으니깐 되네... / 다른 위치에 있으면 안됨... 왠지는 몰루???  /  localhost에서는 상관 없음...
 
-    image = request.files['image']
+    image = request.files['up_image']
     image = Image.open(image)
 
     result = model.predict(image, save=False, imgsz=640, conf=0.3, device='cpu', iou=0.7)   # conf값으로 정확도 조절 가능
@@ -57,9 +58,11 @@ def predRecycling():
 
     # cv2.imwrite("./test_result.jpg", image)
     ret, buffer = cv2.imencode('.jpg', image)
-    img_byte_array = buffer.tobytes()
+    # img_byte_array = buffer.tobytes()
+    img_base64 = base64.b64encode(buffer).decode('utf-8')
 
-    return Response(img_byte_array, content_type='image/jpeg')
+    # return Response(img_byte_array, content_type='image/jpeg')
+    return render_template('index.html', return_result="success", return_img=img_base64)
 
 
 @app.route('/downRecycling', methods=['GET'])
@@ -67,7 +70,7 @@ def downRecycling():
     return send_file("./static/msai8_recycling_report.pptx", as_attachment=True)    # pdf파일로 변환할 것
 
 
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
-
 
